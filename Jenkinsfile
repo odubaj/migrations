@@ -2,8 +2,12 @@
 
 node {
 
+    load "$JENKINS_HOME/jobvars.env"
+
     environment {
-        load "$JENKINS_HOME/jobvars.env"
+        AWS_URI = env.AWS_URI
+        AWS_REGION = env.AWS_REGION
+        sh 'printenv'
     }
 
     stage('Checkout') {
