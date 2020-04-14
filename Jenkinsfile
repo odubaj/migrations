@@ -1,6 +1,6 @@
 #!groovy
 
-pipline {
+pipeline {
 
     load "$JENKINS_HOME/jobvars.env"
 
