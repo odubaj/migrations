@@ -2,7 +2,9 @@
 
 node {
 
-    load "$JENKINS_HOME/jobvars.env"
+    environment {
+        load "$JENKINS_HOME/jobvars.env"
+    }
 
     stage('Checkout') {
         checkout scm
