@@ -24,11 +24,11 @@ node {
 
                 stage('Push to ECR') {
                     sh 'docker tag reportportal-dev/db-scripts ${AWS_URI}/db-scripts'
-//                    def image = env.AWS_URI + '/db-scripts'
-//                    def url = 'https://' + env.AWS_URI
-//                    def credentials = 'ecr:' + env.AWS_REGION + ':aws_credentials'
-                    docker.withRegistry('https://${AWS_URI}', 'ecr:${AWS_REGION}:aws_credentials') {
-                        docker.image('${AWS_URI}/db-scripts').push('SNAPSHOT-${BUILD_NUMBER}')
+                    def image = env.AWS_URI + '/db-scripts'
+                    def url = 'https://' + env.AWS_URI
+                    def credentials = 'ecr:' + env.AWS_REGION + ':aws_credentials'
+                    docker.withRegistry(url, credentials) {
+                        docker.image(image).push('SNAPSHOT-${BUILD_NUMBER}')
                     }
                 }
             }
