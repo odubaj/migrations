@@ -4,12 +4,6 @@ node {
 
     load "$JENKINS_HOME/jobvars.env"
 
-    environment {
-        AWS_URI = env.AWS_URI
-        AWS_REGION = env.AWS_REGION
-        sh 'printenv'
-    }
-
     stage('Checkout') {
         checkout scm
     }
@@ -18,8 +12,10 @@ node {
     stage('Build') {
         docker.withServer("$DOCKER_HOST") {
             stage('Build Docker Image') {
-                sh 'printenv'
-                sh 'docker build -t reportportal-dev/db-scripts -t ${AWS_URI}/db-scripts .'
+                withEnv(["URI=${AWS_URI}"]) {
+                    sh 'printenv'
+                    sh 'docker build -t reportportal-dev/db-scripts -t ${URI}/db-scripts .'
+                }
             }
 
             stage('Run Migrations') {
