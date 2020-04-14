@@ -12,9 +12,8 @@ node {
     stage('Build') {
         docker.withServer("$DOCKER_HOST") {
             stage('Build Docker Image') {
-                withEnv(["AWS_URI = ${AWS_URI}"]) {
-                    sh 'docker build -t reportportal-dev/db-scripts -t $AWS_URI/db-scripts .'
-                }
+                sh 'printenv'
+                sh 'docker build -t reportportal-dev/db-scripts -t ${AWS_URI}/db-scripts .'
             }
 
             stage('Run Migrations') {
@@ -23,7 +22,7 @@ node {
 
             stage('Push to ECR') {
                 withEnv([["AWS_URI = ${AWS_URI}", ["AWS_REGION = ${AWS_REGION}"]]]) {
-                    sh 'docker tag reportportal-dev/db-scripts $AWS_URI/db-scripts'
+                    sh 'docker tag reportportal-dev/db-scripts ${AWS_URI}/db-scripts'
                     def image = env.AWS_URI + '/db-scripts'
                     def url = 'https://' + env.AWS_URI
                     def credentials = 'ecr:' + env.AWS_REGION + ':aws_credentials'
