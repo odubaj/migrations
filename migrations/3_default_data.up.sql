@@ -21,7 +21,9 @@ BEGIN
                                                                  (2, 'AUTOMATION_BUG'),
                                                                  (3, 'PRODUCT_BUG'),
                                                                  (4, 'NO_DEFECT'),
-                                                                 (5, 'SYSTEM_ISSUE');
+                                                                 (5, 'SYSTEM_ISSUE'),
+                                                                 (6, 'WAIVED_AS_PASSED'),
+                                                                 (7, 'MANUAL_TEST');
 
     ALTER SEQUENCE issue_group_issue_group_id_seq RESTART WITH 6;
 
@@ -30,6 +32,8 @@ BEGIN
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (3, 'pb001', 'Product Bug', 'PB', '#ec3900');
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (4, 'nd001', 'No Defect', 'ND', '#777777');
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (5, 'si001', 'System Issue', 'SI', '#0274d1');
+    INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (6, 'wap001', 'Waived as Passed', 'WAP', '#3cff33');
+    INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (7, 'mt001', 'Manual test', 'MT', '#334fff');
 
     ALTER SEQUENCE issue_type_id_seq RESTART WITH 6;
 
@@ -46,7 +50,11 @@ BEGIN
                                                       (11, 'statistics$defects$to_investigate$total'),
                                                       (12, 'statistics$defects$to_investigate$ti001'),
                                                       (13, 'statistics$defects$no_defect$total'),
-                                                      (14, 'statistics$defects$no_defect$nd001');
+                                                      (14, 'statistics$defects$no_defect$nd001'),
+                                                      (15, 'tatistics$defects$waived_as_passed$total'),
+                                                      (16, 'statistics$defects$waived_as_passed$wap001'),
+                                                      (17, 'statistics$defects$manual_test$total'),
+                                                      (18, 'statistics$defects$manual_test$mt001');
 
     ALTER SEQUENCE statistics_field_sf_id_seq RESTART WITH 15;
 
@@ -91,8 +99,8 @@ BEGIN
     -- Project configurations
 
     INSERT INTO issue_type_project (project_id, issue_type_id) VALUES
-    (superadminproject, 1), (superadminproject, 2), (superadminproject, 3), (superadminproject, 4), (superadminproject, 5),
-    (defaultproject, 1),(defaultproject, 2),(defaultproject, 3),(defaultproject, 4),(defaultproject, 5);
+    (superadminproject, 1), (superadminproject, 2), (superadminproject, 3), (superadminproject, 4), (superadminproject, 5), (superadminproject, 6), (superadminproject, 7),
+    (defaultproject, 1),(defaultproject, 2),(defaultproject, 3),(defaultproject, 4),(defaultproject, 5),(defaultproject, 6),(defaultproject, 7);
 
 
     INSERT INTO project_attribute (attribute_id, value, project_id) VALUES (1, '1 day', defaultproject), (1, '1 day', superadminproject);
