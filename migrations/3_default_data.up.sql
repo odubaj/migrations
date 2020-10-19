@@ -58,7 +58,7 @@ BEGIN
                                                       (17, 'statistics$defects$manual_test$total'),
                                                       (18, 'statistics$defects$manual_test$mt001'),
                                                       (19, 'statistics$defects$manual_test$mtp001'),
-                                                      (20, 'statistics$defects$manual_test$mtg001');
+                                                      (20, 'statistics$defects$manual_test$mtf001');
 
     ALTER SEQUENCE statistics_field_sf_id_seq RESTART WITH 15;
 
