@@ -34,6 +34,8 @@ BEGIN
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (5, 'si001', 'System Issue', 'SI', '#0274d1');
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (6, 'wap001', 'Waived as Passed', 'WAP', '#3cff33');
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (7, 'mt001', 'Manual test', 'MT', '#334fff');
+    INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (7, 'mtp001', 'Manual test Passed', 'MTP', '#0bf8ef');
+    INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (7, 'mtp001', 'Manual test Failed', 'MTF', '#f00d10');
 
     ALTER SEQUENCE issue_type_id_seq RESTART WITH 6;
 
@@ -54,7 +56,9 @@ BEGIN
                                                       (15, 'tatistics$defects$waived_as_passed$total'),
                                                       (16, 'statistics$defects$waived_as_passed$wap001'),
                                                       (17, 'statistics$defects$manual_test$total'),
-                                                      (18, 'statistics$defects$manual_test$mt001');
+                                                      (18, 'statistics$defects$manual_test$mt001'),
+                                                      (19, 'statistics$defects$manual_test$mtp001'),
+                                                      (20, 'statistics$defects$manual_test$mtg001');
 
     ALTER SEQUENCE statistics_field_sf_id_seq RESTART WITH 15;
 
@@ -99,8 +103,8 @@ BEGIN
     -- Project configurations
 
     INSERT INTO issue_type_project (project_id, issue_type_id) VALUES
-    (superadminproject, 1), (superadminproject, 2), (superadminproject, 3), (superadminproject, 4), (superadminproject, 5), (superadminproject, 6), (superadminproject, 7),
-    (defaultproject, 1),(defaultproject, 2),(defaultproject, 3),(defaultproject, 4),(defaultproject, 5),(defaultproject, 6),(defaultproject, 7);
+    (superadminproject, 1), (superadminproject, 2), (superadminproject, 3), (superadminproject, 4), (superadminproject, 5), (superadminproject, 6), (superadminproject, 7), (superadminproject, 8), (superadminproject, 9),
+    (defaultproject, 1),(defaultproject, 2),(defaultproject, 3),(defaultproject, 4),(defaultproject, 5),(defaultproject, 6),(defaultproject, 7),(defaultproject, 8),(defaultproject, 9);
 
 
     INSERT INTO project_attribute (attribute_id, value, project_id) VALUES (1, '1 day', defaultproject), (1, '1 day', superadminproject);
