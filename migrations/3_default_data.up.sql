@@ -25,7 +25,7 @@ BEGIN
                                                                  (6, 'WAIVED_AS_PASSED'),
                                                                  (7, 'MANUAL_TEST');
 
-    ALTER SEQUENCE issue_group_issue_group_id_seq RESTART WITH 6;
+    ALTER SEQUENCE issue_group_issue_group_id_seq RESTART WITH 8;
 
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (1, 'ti001', 'To Investigate', 'TI', '#ffb743');
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (2, 'ab001', 'Automation Bug', 'AB', '#f7d63e');
@@ -35,9 +35,9 @@ BEGIN
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (6, 'wap001', 'Waived as Passed', 'WAP', '#3cff33');
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (7, 'mt001', 'Manual test', 'MT', '#334fff');
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (7, 'mtp001', 'Manual test Passed', 'MTP', '#0bf8ef');
-    INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (7, 'mtp001', 'Manual test Failed', 'MTF', '#f00d10');
+    INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (7, 'mtf001', 'Manual test Failed', 'MTF', '#f00d10');
 
-    ALTER SEQUENCE issue_type_id_seq RESTART WITH 6;
+    ALTER SEQUENCE issue_type_id_seq RESTART WITH 10;
 
     INSERT INTO statistics_field (sf_id, name) VALUES (1, 'statistics$executions$total'),
                                                       (2, 'statistics$executions$passed'),
@@ -60,7 +60,7 @@ BEGIN
                                                       (19, 'statistics$defects$manual_test$mtp001'),
                                                       (20, 'statistics$defects$manual_test$mtf001');
 
-    ALTER SEQUENCE statistics_field_sf_id_seq RESTART WITH 15;
+    ALTER SEQUENCE statistics_field_sf_id_seq RESTART WITH 21;
 
     INSERT INTO attribute (name) VALUES ('job.interruptJobTime');
     INSERT INTO attribute (name) VALUES ('job.keepLaunches');
