@@ -18,18 +18,20 @@ BEGIN
     email := (SELECT currval(pg_get_serial_sequence('integration_type', 'id')));
 
     INSERT INTO issue_group (issue_group_id, issue_group) VALUES (1, 'TO_INVESTIGATE'),
-                                                                 (2, 'AUTOMATION_BUG'),
+                                                                 (2, 'TEST_BUG'),
                                                                  (3, 'PRODUCT_BUG'),
-                                                                 (4, 'NO_DEFECT'),
+                                                                 (4, 'MINOR_DEFECT'),
                                                                  (5, 'SYSTEM_ISSUE');
 
     ALTER SEQUENCE issue_group_issue_group_id_seq RESTART WITH 6;
 
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (1, 'ti001', 'To Investigate', 'TI', '#ffb743');
-    INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (2, 'ab001', 'Automation Bug', 'AB', '#f7d63e');
+    INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (2, 'tb001', 'Test Bug', 'TB', '#f7d63e');
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (3, 'pb001', 'Product Bug', 'PB', '#ec3900');
-    INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (4, 'nd001', 'No Defect', 'ND', '#777777');
+    INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (4, 'md001', 'Minor Defect', 'MD', '#777777');
     INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (5, 'si001', 'System Issue', 'SI', '#0274d1');
+    INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (3, 'pnb001', 'New Bug', 'PNB', '#321005');
+    INSERT INTO issue_type (issue_group_id, locator, issue_name, abbreviation, hex_color) VALUES (3, 'pkb001', 'Known Bug', 'PKB', '#D5C70B');
 
     ALTER SEQUENCE issue_type_id_seq RESTART WITH 6;
 
@@ -38,18 +40,20 @@ BEGIN
                                                       (3, 'statistics$executions$skipped'),
                                                       (4, 'statistics$executions$failed'),
                                                       (5, 'statistics$executions$untested'),
-                                                      (6, 'statistics$defects$automation_bug$total'),
-                                                      (7, 'statistics$defects$automation_bug$ab001'),
+                                                      (6, 'statistics$defects$test_bug$total'),
+                                                      (7, 'statistics$defects$test_bug$tb001'),
                                                       (8, 'statistics$defects$product_bug$total'),
                                                       (9, 'statistics$defects$product_bug$pb001'),
                                                       (10, 'statistics$defects$system_issue$total'),
                                                       (11, 'statistics$defects$system_issue$si001'),
                                                       (12, 'statistics$defects$to_investigate$total'),
                                                       (13, 'statistics$defects$to_investigate$ti001'),
-                                                      (14, 'statistics$defects$no_defect$total'),
-                                                      (15, 'statistics$defects$no_defect$nd001');
+                                                      (14, 'statistics$defects$minor_defect$total'),
+                                                      (15, 'statistics$defects$minor_defect$md001'),
+                                                      (16, 'statistics$defects$product_bug$pnb001'),
+                                                      (17, 'statistics$defects$product_bug$pkb001');
 
-    ALTER SEQUENCE statistics_field_sf_id_seq RESTART WITH 16;
+    ALTER SEQUENCE statistics_field_sf_id_seq RESTART WITH 18;
 
     INSERT INTO attribute (name) VALUES ('job.interruptJobTime');
     INSERT INTO attribute (name) VALUES ('job.keepLaunches');
@@ -92,8 +96,8 @@ BEGIN
     -- Project configurations
 
     INSERT INTO issue_type_project (project_id, issue_type_id) VALUES
-    (superadminproject, 1), (superadminproject, 2), (superadminproject, 3), (superadminproject, 4), (superadminproject, 5),
-    (defaultproject, 1),(defaultproject, 2),(defaultproject, 3),(defaultproject, 4),(defaultproject, 5);
+    (superadminproject, 1), (superadminproject, 2), (superadminproject, 3), (superadminproject, 4), (superadminproject, 5), (superadminproject, 6), (superadminproject, 7),
+    (defaultproject, 1),(defaultproject, 2),(defaultproject, 3),(defaultproject, 4),(defaultproject, 5),(defaultproject, 6),(defaultproject, 7);
 
 
     INSERT INTO project_attribute (attribute_id, value, project_id) VALUES (1, '1 day', defaultproject), (1, '1 day', superadminproject);
